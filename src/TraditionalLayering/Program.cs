@@ -26,7 +26,6 @@ namespace TraditionalLayering
     {
         public void Configuration(IAppBuilder app)
         {
-           
             app.UseNancy();
         }
     }
@@ -99,11 +98,11 @@ namespace TraditionalLayering
         public AccountService(IAccountRepository accountRepository)
         {
             this.accountRepository = accountRepository;
-            
         }
 
         public Person GetLoggedInUser(int id)
         {
+            //Hit another layer just because the service isnt responsible for retrieving data
             return this.accountRepository.GetLoggedInUser(id);
         }
 
@@ -128,6 +127,7 @@ namespace TraditionalLayering
 
     public class AccountRepository : IAccountRepository
     {
+        //Our DB
         public static Dictionary<int, Person> data = new Dictionary<int, Person>()
         { 
             { 1, new Person{ FirstName = "Jim", LastName = "Parsons", EmailAddress = "jim@parsons.com" } }, 
