@@ -5,13 +5,13 @@ using MediatR;
 namespace QueryHandler
 {
 
-    public class Envelop<T> : IRequest
+    public class Envelope<T> : IRequest
     {
         public DateTime Created { get; private set; }
         public Guid CommandId { get; private set; }
         public T Command { get; private set; }
 
-        public Envelop(Guid commandId, T command)
+        public Envelope(Guid commandId, T command)
         {
             CommandId = commandId;
             Created = DateTime.UtcNow;
@@ -33,7 +33,7 @@ namespace QueryHandler
         }
     }
 
-    public class SellInventoryHandler : IRequestHandler<Envelop<SellInventory>, Unit>
+    public class SellInventoryHandler : IRequestHandler<Envelope<SellInventory>, Unit>
     {
         private readonly InMemoryDatabase _db;
 
@@ -42,7 +42,7 @@ namespace QueryHandler
             _db = db;
         }
 
-        public Unit Handle(Envelop<SellInventory> message)
+        public Unit Handle(Envelope<SellInventory> message)
         {
             // Skip any commands already processed
             if (_db.Idempotent.Any(x => x == message.CommandId)) return new Unit();

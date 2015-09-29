@@ -6,9 +6,9 @@ namespace QueryHandler
 {
     public static class NancyExtensions
     {
-        public static Envelop<T> BindCommandEnvolope<T>(this NancyModule module, Guid commandId)
+        public static Envelope<T> BindCommandEnvelope<T>(this NancyModule module, Guid commandId)
         {
-            return new Envelop<T>(commandId, module.Bind<T>());
+            return new Envelope<T>(commandId, module.Bind<T>());
         }
     }
 }
