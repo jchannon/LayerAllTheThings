@@ -35,7 +35,7 @@ namespace QueryHandler
             container.Register<InMemoryDatabase>().AsSingleton();
             container.Register<IMediator>(new Mediator(container.Resolve, container.ResolveAll));
             container.Register<IRequestHandler<GetInventoryItem, InventoryItem>, GetInventoryItemHandler>();
-            container.Register<IRequestHandler<Envelop<SellInventory>, Unit>, SellInventoryHandler>();
+            container.Register<IRequestHandler<Envelope<SellInventory>, Unit>, SellInventoryHandler>();
         }
     }
     
@@ -54,7 +54,7 @@ namespace QueryHandler
 
             Put["/sell/{commandId:guid}"] = parameters =>
             {
-                var message = this.BindCommandEnvolope<SellInventory>((Guid)parameters.commandId);
+                var message = this.BindCommandEnvelope<SellInventory>((Guid)parameters.commandId);
                 mediator.Send(message);
                 return HttpStatusCode.NoContent;
             };
