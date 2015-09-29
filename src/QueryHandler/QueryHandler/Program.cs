@@ -6,6 +6,7 @@ using Nancy;
 using Owin;
 using Nancy.ModelBinding;
 using Nancy.Validation;
+using FluentValidation;
 
 namespace QueryHandler
 {
@@ -136,6 +137,19 @@ namespace QueryHandler
             var personcmd = command as PersonCommand;
 
             var errorList = new List<string>();
+
+            //Validation
+            var validator = new PersonValidator();
+            var validationresult = validator.Validate(personcmd.Person);
+            if (!validationresult.IsValid)
+            {
+                foreach (var error in validationresult.Errors)
+                {
+                    errorList.Add(error.ErrorMessage);
+                }
+            }
+
+            //Basic business logic
             var existingPerson = DB.Data.Values.FirstOrDefault(x => x.EmailAddress == personcmd.Person.EmailAddress);
 
             if (existingPerson != null)
@@ -220,6 +234,16 @@ namespace QueryHandler
         public string FullName{ get { return FirstName + " " + LastName; } }
 
         public string EmailAddress { get; set; }
+    }
+
+    public class PersonValidator : AbstractValidator<Person>
+    {
+        public PersonValidator()
+        {
+            this.RuleFor(x => x.EmailAddress).NotEmpty();
+            this.RuleFor(x => x.FirstName).NotEmpty();
+            this.RuleFor(x => x.LastName).NotEmpty();
+        }
     }
 
     public class OopsyException : Exception
