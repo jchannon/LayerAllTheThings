@@ -1,17 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin.Hosting;
-using Nancy;
-using Owin;
-using Nancy.ModelBinding;
-using Nancy.Validation;
-using FluentValidation;
-using FluentValidation.Results;
 
 namespace QueryHandler
 {
-
     public static class DB
     {
         //Our DB
@@ -24,5 +14,4 @@ namespace QueryHandler
             { 5, new Person{ FirstName = "Troy", LastName = "Vega", EmailAddress = "troy@vega.com" } }
         };
     }
-    
 }
