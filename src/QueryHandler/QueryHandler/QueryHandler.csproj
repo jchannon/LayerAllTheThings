@@ -60,6 +60,22 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="ICommandHandler.cs" />
+    <Compile Include="IHandleQueries.cs" />
+    <Compile Include="IMediate.cs" />
+    <Compile Include="Mediator.cs" />
+    <Compile Include="UserQuery.cs" />
+    <Compile Include="PersonCommand.cs" />
+    <Compile Include="UserCommandHandler.cs" />
+    <Compile Include="UserQueryHandler.cs" />
+    <Compile Include="DB.cs" />
+    <Compile Include="PersonModule.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="PersonValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
