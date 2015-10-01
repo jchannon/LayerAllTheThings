@@ -1,3 +1,5 @@
+using System;
+
 namespace QueryHandler
 {
     public interface IHandleQueries<in TQuery, out TResponse>
@@ -5,6 +7,6 @@ namespace QueryHandler
     {
         TResponse Handle(TQuery query);
 
-        bool CanHandle(TQuery command);
+        bool CanHandle(Type commandType);
     }
 }

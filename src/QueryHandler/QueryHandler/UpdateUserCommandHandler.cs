@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System;
 
 namespace QueryHandler
 {
@@ -18,9 +19,9 @@ namespace QueryHandler
             return 1;
         }
 
-        public bool CanHandle(ICommand<int> command)
+        public bool CanHandle(Type commandType)
         {
-            return command is UpdateUserCommand;
+            return commandType == typeof(UpdateUserCommand);
         }
     }
 }

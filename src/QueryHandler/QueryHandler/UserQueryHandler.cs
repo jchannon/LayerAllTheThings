@@ -1,4 +1,5 @@
 using System.Linq;
+using System;
 
 namespace QueryHandler
 {
@@ -10,9 +11,9 @@ namespace QueryHandler
             return DB.Data.FirstOrDefault(x => x.Key == userQuery.UserId).Value;
         }
 
-        public bool CanHandle(IQuery<User> query)
+        public bool CanHandle(Type queryType)
         {
-            return query is UserQuery;
+            return queryType == typeof(UserQuery);
         }
     }
 }

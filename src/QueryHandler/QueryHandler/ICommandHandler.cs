@@ -1,3 +1,5 @@
+using System;
+
 namespace QueryHandler
 {
     public interface ICommandHandler<in TCommand, out TResponse>
@@ -5,6 +7,6 @@ namespace QueryHandler
     {
         TResponse Handle(TCommand command);
 
-        bool CanHandle(TCommand command);
+        bool CanHandle(Type commandType);
     }
 }
