@@ -69,13 +69,15 @@
     <Compile Include="IMediate.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="UserQuery.cs" />
-    <Compile Include="PersonCommand.cs" />
-    <Compile Include="UserCommandHandler.cs" />
     <Compile Include="UserQueryHandler.cs" />
     <Compile Include="DB.cs" />
-    <Compile Include="PersonModule.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PersonValidator.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserModule.cs" />
+    <Compile Include="UserValidator.cs" />
+    <Compile Include="InsertUserCommand.cs" />
+    <Compile Include="InsertUserCommandHandler.cs" />
+    <Compile Include="UpdateUserCommand.cs" />
+    <Compile Include="UpdateUserCommandHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

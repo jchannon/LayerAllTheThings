@@ -6,25 +6,26 @@ using FluentValidation.Results;
 
 namespace QueryHandler
 {
-    public class UserCommandHandler : ICommandHandler<ICommand<int>,int>
+    public class InsertUserCommandHandler : ICommandHandler<ICommand<int>,int>
     {
         public int Handle(ICommand<int> command)
         {
-            var personcmd = command as PersonCommand;
+            var insertUserCmd = command as InsertUserCommand;
 
             var errorList = new Dictionary<string,string>();
 
             //Validation
-            var validator = new PersonValidator();
-            validator.ValidateAndThrow(personcmd.Person);
+            var validator = new UserValidator();
+            validator.ValidateAndThrow(insertUserCmd.User);
 
             //Basic business logic
-            var existingPerson = DB.Data.Values.FirstOrDefault(x => x.EmailAddress == personcmd.Person.EmailAddress);
+            var existingPerson = DB.Data.Values.FirstOrDefault(x => x.EmailAddress == insertUserCmd.User.EmailAddress);
 
             if (existingPerson != null)
             {
                 errorList.Add("EmailAddress", "User already exists");
             }
+
             if (errorList.Any())
             {
                 var validationErrors = new List<ValidationFailure>();
@@ -38,9 +39,14 @@ namespace QueryHandler
             //Other business logic that might do checks and return errors
 
             var newid = DB.Data.Keys.Count + 1;
-            DB.Data.Add(newid, personcmd.Person);
+            DB.Data.Add(newid, insertUserCmd.User);
 
             return newid;
+        }
+
+        public bool CanHandle(ICommand<int> command)
+        {
+            return command is InsertUserCommand;
         }
     }
 }

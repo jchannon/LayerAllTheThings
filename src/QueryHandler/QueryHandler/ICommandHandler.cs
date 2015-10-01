@@ -4,5 +4,7 @@ namespace QueryHandler
         where TCommand : ICommand<TResponse>
     {
         TResponse Handle(TCommand command);
+
+        bool CanHandle(TCommand command);
     }
 }

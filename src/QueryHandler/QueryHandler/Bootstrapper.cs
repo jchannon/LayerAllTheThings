@@ -8,16 +8,27 @@ namespace QueryHandler
         {
             var mediator = new Mediator();
             
-            mediator.Register<IHandleQueries<IQuery<Person>, Person>>(delegate
-                {
-                    return new UserQueryHandler();
-                });
+//            mediator.Register<IHandleQueries<IQuery<User>, User>>(delegate
+//                {
+//                    return new UserQueryHandler();
+//                });
+//
+//            mediator.Register<ICommandHandler<ICommand<int>, int>>(delegate
+//                {
+//                    return new InsertUserCommandHandler();
+//                }
+//            );
 
-            mediator.Register<ICommandHandler<ICommand<int>, int>>(delegate
-                {
-                    return new UserCommandHandler();
-                }
-            );
+            mediator.Register<IHandleQueries<IQuery<User>,User>, UserQueryHandler>();
+
+            mediator.Register<ICommandHandler<ICommand<int>,int>,UpdateUserCommandHandler>();
+            mediator.Register<ICommandHandler<ICommand<int>,int>,InsertUserCommandHandler>();
+
+//            mediator.Register<ICommandHandler<ICommand<int>, int>>(delegate
+//                {
+//                    return new UpdateUserCommandHandler();
+//                }
+//            );
 
             container.Register<IMediate,Mediator>(mediator);
         }

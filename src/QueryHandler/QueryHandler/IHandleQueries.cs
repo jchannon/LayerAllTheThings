@@ -4,5 +4,7 @@ namespace QueryHandler
     where TQuery : IQuery<TResponse>
     {
         TResponse Handle(TQuery query);
+
+        bool CanHandle(TQuery command);
     }
 }

@@ -1,6 +1,6 @@
 namespace QueryHandler
 {
-    public class UserQuery : IQuery<Person>
+    public class UserQuery : IQuery<User>
     {
         public int UserId { get; private set; }
 

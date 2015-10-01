@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace QueryHandler
 {
-    public class PersonValidator : AbstractValidator<Person>
+    public class UserValidator : AbstractValidator<User>
     {
-        public PersonValidator()
+        public UserValidator()
         {
             this.RuleFor(x => x.EmailAddress).NotEmpty();
             this.RuleFor(x => x.FirstName).NotEmpty();
