@@ -44,9 +44,9 @@ namespace QueryHandler
             return newid;
         }
 
-        public bool CanHandle(ICommand<int> command)
+        public bool CanHandle(Type commandType)
         {
-            return command is InsertUserCommand;
+            return commandType == typeof(InsertUserCommand);
         }
     }
 }

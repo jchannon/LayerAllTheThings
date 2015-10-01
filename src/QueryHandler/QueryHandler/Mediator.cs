@@ -39,16 +39,20 @@ namespace QueryHandler
 
             foreach (var registration in Classes)
             {
-               
-
-                T myType = (T)Activator.CreateInstance(registration.ConcreteType);
-
-                var mi = typeof(T).GetMethod("CanHandle"); 
-
-                var canHandle = (bool)mi.Invoke(myType, new object[] { instance });
-                if (canHandle)
+                try
                 {
-                    item = myType;
+                    var instansiatedObject = (T)Activator.CreateInstance(registration.ConcreteType);
+
+                    var mi = typeof(T).GetMethod("CanHandle"); 
+
+                    var canHandle = (bool)mi.Invoke(instansiatedObject, new object[] { instance });
+                    if (canHandle)
+                    {
+                        item = instansiatedObject;
+                    }
+                }
+                catch
+                {
                 }
             }
 
