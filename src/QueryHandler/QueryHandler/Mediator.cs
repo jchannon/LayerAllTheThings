@@ -49,6 +49,7 @@ namespace QueryHandler
                     if (canHandle)
                     {
                         item = instansiatedObject;
+                        break;
                     }
                 }
                 catch
