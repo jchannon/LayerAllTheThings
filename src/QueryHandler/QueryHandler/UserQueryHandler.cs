@@ -8,7 +8,7 @@ namespace QueryHandler
         public User Handle(IQuery<User> query)
         {
             var userQuery = query as UserQuery;
-            return DB.Data.FirstOrDefault(x => x.Key == userQuery.UserId).Value;
+            return DB.Data.FirstOrDefault(x => x.Id == userQuery.UserId);
         }
 
         public bool CanHandle(Type queryType)

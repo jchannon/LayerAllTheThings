@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using System;
+using System.Linq;
 
 namespace QueryHandler
 {
@@ -13,7 +14,11 @@ namespace QueryHandler
             var validator = new UserValidator();
             validator.ValidateAndThrow(updateUserCmd.User);
 
-            DB.Data[updateUserCmd.User.Id] = updateUserCmd.User;
+            var currentUser = DB.Data.FirstOrDefault(x => x.Id == updateUserCmd.User.Id);
+            currentUser.FirstName = updateUserCmd.User.FirstName;
+            currentUser.LastName = updateUserCmd.User.LastName;
+            currentUser.EmailAddress = updateUserCmd.User.EmailAddress;
+
 
             //Rows affected
             return 1;

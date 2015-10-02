@@ -13,6 +13,10 @@ namespace QueryHandler
         {
             Get["/"] = _ => "Hi Earth People!";
 
+
+            //404 if not found!!!!
+
+
             Get["/{id:int}"] = parameters =>
             {
                 var userQuery = new UserQuery((int)parameters.id);
