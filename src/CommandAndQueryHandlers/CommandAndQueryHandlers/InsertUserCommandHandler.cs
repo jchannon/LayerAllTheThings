@@ -19,7 +19,7 @@ namespace QueryHandler
             validator.ValidateAndThrow(insertUserCmd.User);
 
             //Basic business logic
-            var existingPerson = DB.Data.Values.FirstOrDefault(x => x.EmailAddress == insertUserCmd.User.EmailAddress);
+            var existingPerson = DB.Data.FirstOrDefault(x => x.EmailAddress == insertUserCmd.User.EmailAddress);
 
             if (existingPerson != null)
             {
@@ -38,8 +38,9 @@ namespace QueryHandler
 
             //Other business logic that might do checks and return errors
 
-            var newid = DB.Data.Keys.Count + 1;
-            DB.Data.Add(newid, insertUserCmd.User);
+            var newid = DB.Data.Last().Id + 1;
+            insertUserCmd.User.Id = newid;
+            DB.Data.Add(insertUserCmd.User);
 
             return newid;
         }

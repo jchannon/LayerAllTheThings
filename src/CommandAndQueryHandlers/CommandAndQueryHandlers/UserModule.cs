@@ -13,11 +13,22 @@ namespace QueryHandler
         {
             Get["/"] = _ => "Hi Earth People!";
 
+
+            //404 if not found!!!!
+
+
             Get["/{id:int}"] = parameters =>
             {
                 var userQuery = new UserQuery((int)parameters.id);
-                var person = mediator.Request(userQuery);
-                return person;
+                try
+                {
+                    var person = mediator.Request(userQuery);
+                    return person;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return HttpStatusCode.NotFound;
+                }
             };
 
             Put["/{id:int}"] = parameters =>
@@ -32,6 +43,10 @@ namespace QueryHandler
                 catch (ValidationException ex)
                 {
                     return Negotiate.WithModel(ex.Errors.Select(x => new{x.PropertyName, x.ErrorMessage})).WithStatusCode(HttpStatusCode.UnprocessableEntity);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return HttpStatusCode.NotFound;
                 }
             };
 
