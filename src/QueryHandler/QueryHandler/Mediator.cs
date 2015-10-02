@@ -23,7 +23,7 @@ namespace QueryHandler
 
         public TResponse Request<TResponse>(IQuery<TResponse> query)
         {
-            var handler = Resolve<IHandleQueries<IQuery<TResponse>,TResponse>>(query.GetType());
+            var handler = Resolve<IQueryHandler<IQuery<TResponse>,TResponse>>(query.GetType());
             return handler.Handle(query);
         }
 

@@ -65,7 +65,6 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="ICommandHandler.cs" />
-    <Compile Include="IHandleQueries.cs" />
     <Compile Include="IMediate.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="UserQuery.cs" />
@@ -78,6 +77,7 @@
     <Compile Include="InsertUserCommandHandler.cs" />
     <Compile Include="UpdateUserCommand.cs" />
     <Compile Include="UpdateUserCommandHandler.cs" />
+    <Compile Include="IQueryHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

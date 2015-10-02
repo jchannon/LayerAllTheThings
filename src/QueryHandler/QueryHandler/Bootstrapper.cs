@@ -19,7 +19,7 @@ namespace QueryHandler
 //                }
 //            );
 
-            mediator.Register<IHandleQueries<IQuery<User>,User>, UserQueryHandler>();
+            mediator.Register<IQueryHandler<IQuery<User>,User>, UserQueryHandler>();
 
             mediator.Register<ICommandHandler<ICommand<int>,int>,UpdateUserCommandHandler>();
             mediator.Register<ICommandHandler<ICommand<int>,int>,InsertUserCommandHandler>();
