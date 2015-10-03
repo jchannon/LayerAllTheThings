@@ -13,10 +13,6 @@ namespace QueryHandler
         {
             Get["/"] = _ => "Hi Earth People!";
 
-
-            //404 if not found!!!!
-
-
             Get["/{id:int}"] = parameters =>
             {
                 var userQuery = new UserQuery((int)parameters.id);
@@ -31,7 +27,7 @@ namespace QueryHandler
                 }
             };
 
-            Put["/{id:int}"] = parameters =>
+            Put["/{id:int}"] = _ =>
             {
                 var user = this.Bind<User>();
                 var updateUserCmd = new UpdateUserCommand(user); 
@@ -44,13 +40,9 @@ namespace QueryHandler
                 {
                     return Negotiate.WithModel(ex.Errors.Select(x => new{x.PropertyName, x.ErrorMessage})).WithStatusCode(HttpStatusCode.UnprocessableEntity);
                 }
-                catch (InvalidOperationException ex)
-                {
-                    return HttpStatusCode.NotFound;
-                }
             };
 
-            Post["/"] = parameters =>
+            Post["/"] = _ =>
             {
                 var user = this.Bind<User>();
                 var insertUserCmd = new InsertUserCommand(user);
@@ -65,6 +57,12 @@ namespace QueryHandler
                 }
             };
 
+            Delete["/{id:int}"] = parameters =>
+            {
+                var deleteUserCommand = new DeleteUserCommand((int)parameters.id);
+                mediator.Send(deleteUserCommand);
+                return HttpStatusCode.NoContent;
+            };
         }
     }
 }

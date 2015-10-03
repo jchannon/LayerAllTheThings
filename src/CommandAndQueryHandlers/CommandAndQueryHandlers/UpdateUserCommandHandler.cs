@@ -16,15 +16,13 @@ namespace QueryHandler
 
             var currentUser = DB.Data.FirstOrDefault(x => x.Id == updateUserCmd.User.Id);
 
-            if (currentUser == null)
+            //Idempotent!!
+            if (currentUser != null)
             {
-                throw new InvalidOperationException("User not found");
+                currentUser.FirstName = updateUserCmd.User.FirstName;
+                currentUser.LastName = updateUserCmd.User.LastName;
+                currentUser.EmailAddress = updateUserCmd.User.EmailAddress;
             }
-
-            currentUser.FirstName = updateUserCmd.User.FirstName;
-            currentUser.LastName = updateUserCmd.User.LastName;
-            currentUser.EmailAddress = updateUserCmd.User.EmailAddress;
-
 
             //Rows affected
             return 1;

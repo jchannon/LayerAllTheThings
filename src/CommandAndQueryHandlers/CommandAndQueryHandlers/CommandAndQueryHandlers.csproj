@@ -78,6 +78,8 @@
     <Compile Include="UpdateUserCommand.cs" />
     <Compile Include="UpdateUserCommandHandler.cs" />
     <Compile Include="IQueryHandler.cs" />
+    <Compile Include="DeleteUserCommand.cs" />
+    <Compile Include="DeleteUserCommandHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -23,6 +23,7 @@ namespace QueryHandler
 
             mediator.Register<ICommandHandler<ICommand<int>,int>,UpdateUserCommandHandler>();
             mediator.Register<ICommandHandler<ICommand<int>,int>,InsertUserCommandHandler>();
+            mediator.Register<ICommandHandler<ICommand<int>,int>,DeleteUserCommandHandler>();
 
 //            mediator.Register<ICommandHandler<ICommand<int>, int>>(delegate
 //                {
