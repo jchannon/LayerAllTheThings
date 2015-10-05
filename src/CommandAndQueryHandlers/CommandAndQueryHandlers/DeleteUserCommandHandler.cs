@@ -3,12 +3,20 @@ using System.Linq;
 
 namespace QueryHandler
 {
-    public class DeleteUserCommandHandler : ICommandHandler<ICommand<int>,int>
+    public class DeleteUserCommandHandler : ICommandHandler<ICommand<int>, int>
     {
         public int Handle(ICommand<int> command)
         {
             var deleteUserCommand = command as DeleteUserCommand;
-            var removed = DB.Data.Remove(DB.Data.FirstOrDefault(x => x.Id == deleteUserCommand.UserId));
+
+            var user = DB.Data.FirstOrDefault(x => x.Id == deleteUserCommand.UserId);
+
+            if(user == null)
+            {
+                throw new InvalidOperationException("User not found");
+            }
+
+            var removed = DB.Data.Remove(user);
             return removed ? 1 : 0;
         }
 
@@ -18,4 +26,3 @@ namespace QueryHandler
         }
     }
 }
-

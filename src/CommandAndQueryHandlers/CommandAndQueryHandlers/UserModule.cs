@@ -8,7 +8,7 @@ namespace QueryHandler
 {
     public class UserModule : NancyModule
     {
-        
+
         public UserModule(IMediate mediator)
         {
             Get["/"] = _ => "Hi Earth People!";
@@ -21,7 +21,7 @@ namespace QueryHandler
                     var person = mediator.Request(userQuery);
                     return person;
                 }
-                catch (InvalidOperationException ex)
+                catch (InvalidOperationException)
                 {
                     return HttpStatusCode.NotFound;
                 }
@@ -30,15 +30,19 @@ namespace QueryHandler
             Put["/{id:int}"] = _ =>
             {
                 var user = this.Bind<User>();
-                var updateUserCmd = new UpdateUserCommand(user); 
+                var updateUserCmd = new UpdateUserCommand(user);
                 try
                 {
-                    var id = mediator.Send(updateUserCmd);
+                    mediator.Send(updateUserCmd);
                     return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
                 }
                 catch (ValidationException ex)
                 {
                     return Negotiate.WithModel(ex.Errors.Select(x => new{x.PropertyName, x.ErrorMessage})).WithStatusCode(HttpStatusCode.UnprocessableEntity);
+                }
+                catch (InvalidOperationException)
+                {
+                    return HttpStatusCode.NotFound;
                 }
             };
 
@@ -60,7 +64,14 @@ namespace QueryHandler
             Delete["/{id:int}"] = parameters =>
             {
                 var deleteUserCommand = new DeleteUserCommand((int)parameters.id);
-                mediator.Send(deleteUserCommand);
+                try
+                {
+                    mediator.Send(deleteUserCommand);
+                }
+                catch (InvalidOperationException)
+                {
+                    return HttpStatusCode.NotFound;
+                }
                 return HttpStatusCode.NoContent;
             };
         }
