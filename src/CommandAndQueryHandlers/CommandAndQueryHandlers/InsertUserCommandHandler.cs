@@ -14,7 +14,7 @@ namespace QueryHandler
 
             var errorList = new Dictionary<string,string>();
 
-            //Validation
+            //Validation - put this here to avoid having code check ModelValidationResult in module. Just a personal preference
             var validator = new UserValidator();
             validator.ValidateAndThrow(insertUserCmd.User);
 
