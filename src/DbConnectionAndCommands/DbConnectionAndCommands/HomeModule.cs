@@ -24,6 +24,13 @@
 
                 return 200;
             };
+
+            Post["/"] = _ =>
+            {
+                //So we could inject a dbconnection and return data from this module but I dont like that due to the comments above. 
+                //What about POST/PUT? We need somewhere to do business logic etc which I think should be a service or command layer
+                return 201;
+            };
         }
     }
 }
