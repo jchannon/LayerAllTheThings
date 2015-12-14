@@ -15,6 +15,8 @@
         {
             //base.ConfigureApplicationContainer(container); // Lets our app do all the wiring up
            
+            //Instead of having stored procedures do the abstraction we can tell IOC to do it. 
+            //That way we have commands/queries that can use db specific sql for example. 
             switch (ConfigurationManager.ConnectionStrings["mydb"].ProviderName.ToLower())
             {
                 case "system.data.sqlclient":
