@@ -2,6 +2,8 @@ namespace MultiDbSupportWithConventions.Features.Users.AddUser
 {
     using System;
 
+    using FluentValidation;
+
     using MediatR;
 
     public abstract class AddUserCommandHandler : IRequestHandler<AddUserCommand, int>
@@ -17,6 +19,9 @@ namespace MultiDbSupportWithConventions.Features.Users.AddUser
         {
             //This method can have unit tests or acceptance tests as shown in the MultiDbSupportWithConventions.Tests project
 
+            //Move validation out of modules and validate here and throw on error for module to catch
+            var validator = new AddUserValidator();
+            validator.ValidateAndThrow(message);
 
             //Contrived shared logic across shared across multi db implementations
             var userAlreadyExist = this.UserExists(message);
@@ -34,7 +39,6 @@ namespace MultiDbSupportWithConventions.Features.Users.AddUser
         }
 
         protected abstract int StoreNewUser(AddUserCommand message);
-
         protected abstract bool UserExists(AddUserCommand message);
     }
 }

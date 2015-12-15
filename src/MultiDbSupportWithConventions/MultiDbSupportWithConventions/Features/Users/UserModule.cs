@@ -1,7 +1,13 @@
 ﻿namespace MultiDbSupportWithConventions.Features.Users
 {
+    using System;
+    using System.Linq;
+
+    using FluentValidation;
+
     using MediatR;
 
+    using MultiDbSupportWithConventions.Features.Users.GetUser;
     using MultiDbSupportWithConventions.Features.Users.GetUsers;
 
     using Nancy;
@@ -18,19 +24,35 @@
                 return mediator.Send(query);
             };
 
+            this.Get["/{id:int}"] = parameters =>
+            {
+                var query = new GetUserQuery((int)parameters.id);
+                try
+                {
+                    return mediator.Send(query);
+                }
+                catch (InvalidOperationException)
+                {
+                    return 404;
+                }
+            };
+
             this.Post["/"] = _ =>
             {
-                var incomingModel = this.BindAndValidate<AddUserCommand>();//This could be moved to an extension or decorator to the command
+                var incomingModel = this.Bind<AddUserCommand>();
 
-                // This could also be added to an extension or decorator to keep modules anaemic and have cross cutting converns like validation orthogonal
-                if (!this.ModelValidationResult.IsValid)
+                try
                 {
-                    return 422;
+                    var id = mediator.Send(incomingModel);
+
+                    return this.Negotiate.WithStatusCode(201).WithHeader("Location", "http://example.com/" + id);
                 }
-
-                var id = mediator.Send(incomingModel);
-
-                return this.Negotiate.WithStatusCode(201).WithHeader("Location", "http://example.com/" + id);
+                catch (ValidationException ex)
+                {
+                    return
+                        Negotiate.WithModel(ex.Errors.Select(x => new {x.PropertyName, x.ErrorMessage}))
+                            .WithStatusCode(HttpStatusCode.UnprocessableEntity);
+                }
             };
         }
     }

@@ -81,6 +81,8 @@
     <Compile Include="Features\Users\AddUser\MsSqlAddUserCommandHandler.cs" />
     <Compile Include="Features\Users\GetUsers\MsSqlUserListQueryRequestHandler.cs" />
     <Compile Include="Features\Users\GetUsers\NpgsqlUserListQueryRequestHandler.cs" />
+    <Compile Include="Features\Users\GetUser\AgnosticDbGetUserQueryHandler.cs" />
+    <Compile Include="Features\Users\GetUser\GetUserQuery.cs" />
     <Compile Include="Features\Users\UserModule.cs" />
     <Compile Include="Features\Users\User.cs" />
     <Compile Include="Features\Users\GetUsers\UserListQuery.cs" />

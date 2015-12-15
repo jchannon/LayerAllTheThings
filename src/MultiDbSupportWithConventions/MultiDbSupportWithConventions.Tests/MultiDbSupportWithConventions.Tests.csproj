@@ -107,8 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Users\AddUser\AddUserTests.cs" />
-    <Compile Include="Features\Users\AddUser\NoDbAddUserCommandHandler.cs" />
-    <Compile Include="Features\Users\GetUsers\GetUserTests.cs" />
+    <Compile Include="Features\Users\GetUsers\GetUsersTests.cs" />
+    <Compile Include="Features\Users\GetUser\GetUserTests.cs" />
+    <Compile Include="Features\Users\NoDbAddUserCommandHandler.cs" />
     <Compile Include="OurTestBStrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

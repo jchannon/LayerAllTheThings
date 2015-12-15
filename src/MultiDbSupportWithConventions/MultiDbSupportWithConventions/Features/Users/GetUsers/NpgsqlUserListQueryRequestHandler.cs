@@ -1,7 +1,6 @@
 ﻿namespace MultiDbSupportWithConventions.Features.Users.GetUsers
 {
     using System.Collections.Generic;
-    using System.Data;
 
     using Dapper;
 

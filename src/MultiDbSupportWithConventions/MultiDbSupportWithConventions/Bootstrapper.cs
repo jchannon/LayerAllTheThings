@@ -8,6 +8,7 @@
 
     using MultiDbSupportWithConventions.Features.Users;
     using MultiDbSupportWithConventions.Features.Users.AddUser;
+    using MultiDbSupportWithConventions.Features.Users.GetUser;
     using MultiDbSupportWithConventions.Features.Users.GetUsers;
 
     using Nancy;
@@ -18,7 +19,7 @@
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             //base.ConfigureApplicationContainer(container); // Lets our app do all the wiring up
-           
+
             //Instead of having stored procedures do the abstraction we can tell IOC to do it. 
             //That way we have commands/queries that can use db specific sql for example. 
             switch (ConfigurationManager.ConnectionStrings["mydb"].ProviderName.ToLower())
@@ -27,10 +28,12 @@
                     container.Register<IDbConnectionProvider, SqlServerConnectionProvider>();
                     container.Register<IRequestHandler<UserListQuery, IEnumerable<User>>, MssqlUserListQueryRequestHandler>();
                     container.Register<IRequestHandler<AddUserCommand, int>, MsSqlAddUserCommandHandlerCommandHandlerHandler>();
+                    container.Register<IRequestHandler<GetUserQuery, User>, AgnosticDbGetUserQueryHandler>();
                     break;
                 case "npgsql":
                     container.Register<IDbConnectionProvider, PostgresConnectionProvider>();
                     container.Register<IRequestHandler<UserListQuery, IEnumerable<User>>, NpgsqlUserListQueryRequestHandler>();
+                    container.Register<IRequestHandler<GetUserQuery, User>, AgnosticDbGetUserQueryHandler>();
                     break;
                 default:
                     throw new ArgumentException("Invalid ProviderName in connection string.");

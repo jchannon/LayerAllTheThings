@@ -35,10 +35,9 @@
                 FirstName = "vincent",
                 LastName = "vega",
                 Email = "vincent@home.com"
-
             });
 
-            Assert.Equal(201,(int)response.StatusCode);
+            Assert.Equal(201, (int)response.StatusCode);
             Assert.NotNull(response.Headers.Location);
         }
 
@@ -46,7 +45,8 @@
         public async Task Should_return_422_on_invalid_data()
         {
             var appBuilder = new AppBuilder();
-            new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists:false,newUserId:1))).Configuration(appBuilder);
+            new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: false, newUserId: 1)))
+                .Configuration(appBuilder);
 
             var handler = new OwinHttpMessageHandler(appBuilder.Build())
             {
@@ -68,7 +68,8 @@
         public async Task Should_return_500_if_user_exists()
         {
             var appBuilder = new AppBuilder();
-            new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: true, newUserId: 1))).Configuration(appBuilder);
+            new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: true, newUserId: 1)))
+                .Configuration(appBuilder);
 
             var handler = new OwinHttpMessageHandler(appBuilder.Build())
             {

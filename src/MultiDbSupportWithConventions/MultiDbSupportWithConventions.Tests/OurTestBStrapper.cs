@@ -7,18 +7,21 @@ namespace MultiDbSupportWithConventions.Tests
     using MediatR;
 
     using MultiDbSupportWithConventions.Features.Users;
+    using MultiDbSupportWithConventions.Features.Users.GetUser;
     using MultiDbSupportWithConventions.Features.Users.GetUsers;
-    using MultiDbSupportWithConventions.Tests.Features.Users.AddUser;
+    using MultiDbSupportWithConventions.Tests.Features.Users;
 
     using Nancy.TinyIoc;
 
     public class OurTestBStrapper : Bootstrapper
     {
+        private readonly IRequestHandler<GetUserQuery, User> getUserRequestHandler;
         private readonly IRequestHandler<AddUserCommand, int> addUserRequestHandler;
 
-        public OurTestBStrapper(IRequestHandler<AddUserCommand, int> addUserRequestHandler = null)
+        public OurTestBStrapper(IRequestHandler<AddUserCommand, int> addUserRequestHandler = null, IRequestHandler<GetUserQuery, User> getUserRequestHandler = null)
         {
-            this.addUserRequestHandler = addUserRequestHandler ?? new NoDbAddUserCommandHandler(userExists:false,newUserId:1);
+            this.getUserRequestHandler = getUserRequestHandler;
+            this.addUserRequestHandler = addUserRequestHandler;
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
@@ -31,6 +34,7 @@ namespace MultiDbSupportWithConventions.Tests
 
             container.Register<IRequestHandler<UserListQuery, IEnumerable<User>>>(fakeUserQuery);
             container.Register<IRequestHandler<AddUserCommand, int>>(this.addUserRequestHandler);
+            container.Register<IRequestHandler<GetUserQuery, User>>(this.getUserRequestHandler);
         }
     }
 }

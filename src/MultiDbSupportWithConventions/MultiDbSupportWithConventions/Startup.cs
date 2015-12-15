@@ -17,6 +17,7 @@
         {
             this.bootstrapper = new Bootstrapper();
         }
+
         public void Configuration(IAppBuilder app)
         {
             app.UseNancy(options => options.Bootstrapper = this.bootstrapper);

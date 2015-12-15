@@ -1,12 +1,12 @@
-namespace MultiDbSupportWithConventions.Tests.Features.Users.AddUser
+namespace MultiDbSupportWithConventions.Tests.Features.Users
 {
     using MultiDbSupportWithConventions.Features.Users;
     using MultiDbSupportWithConventions.Features.Users.AddUser;
 
     public class NoDbAddUserCommandHandler : AddUserCommandHandler
     {
-        private readonly bool userExists;
         private readonly int newUserId;
+        private readonly bool userExists;
 
         public NoDbAddUserCommandHandler(bool userExists, int newUserId)
             : base(null)

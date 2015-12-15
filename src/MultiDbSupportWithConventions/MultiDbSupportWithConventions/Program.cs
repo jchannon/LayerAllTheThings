@@ -4,9 +4,9 @@
 
     using Microsoft.Owin.Hosting;
 
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             using (WebApp.Start<Startup>("http://+:5678"))
             {
