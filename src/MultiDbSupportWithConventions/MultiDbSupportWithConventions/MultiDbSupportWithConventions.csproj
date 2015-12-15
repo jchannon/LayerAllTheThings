@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Features\Users\AddUser\AddUser.cs" />
+    <Compile Include="Features\Users\AddUser\AddUserCommand.cs" />
     <Compile Include="Features\Users\AddUser\MsSqlAddUserCommandHandler.cs" />
     <Compile Include="Features\Users\GetUsers\MsSqlUserListQueryRequestHandler.cs" />
     <Compile Include="Features\Users\GetUsers\NpgsqlUserListQueryRequestHandler.cs" />
