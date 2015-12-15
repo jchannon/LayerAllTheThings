@@ -19,16 +19,9 @@
             new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: false, newUserId: 1)))
                 .Configuration(appBuilder);
 
-            var handler = new OwinHttpMessageHandler(appBuilder.Build())
-            {
-                UseCookies = true
-            };
+            var handler = this.GetOwinHttpMessageHandler(appBuilder);
 
-            var client = new HttpClient(handler)
-            {
-                BaseAddress = new Uri("http://localhost")
-            };
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var client = this.GetHttpClient(handler);
 
             var response = await client.PostAsJsonAsync("/", new AddUserCommand
             {
@@ -48,16 +41,9 @@
             new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: false, newUserId: 1)))
                 .Configuration(appBuilder);
 
-            var handler = new OwinHttpMessageHandler(appBuilder.Build())
-            {
-                UseCookies = true
-            };
+            var handler = this.GetOwinHttpMessageHandler(appBuilder);
 
-            var client = new HttpClient(handler)
-            {
-                BaseAddress = new Uri("http://localhost")
-            };
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var client = this.GetHttpClient(handler);
 
             var response = await client.PostAsJsonAsync("/", new AddUserCommand());
 
@@ -71,16 +57,9 @@
             new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: true, newUserId: 1)))
                 .Configuration(appBuilder);
 
-            var handler = new OwinHttpMessageHandler(appBuilder.Build())
-            {
-                UseCookies = true
-            };
+            var handler = this.GetOwinHttpMessageHandler(appBuilder);
 
-            var client = new HttpClient(handler)
-            {
-                BaseAddress = new Uri("http://localhost")
-            };
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var client = this.GetHttpClient(handler);
 
             var response = await client.PostAsJsonAsync("/", new AddUserCommand
             {
@@ -90,6 +69,25 @@
             });
 
             Assert.Equal(422, (int)response.StatusCode);
+        }
+
+        private HttpClient GetHttpClient(OwinHttpMessageHandler handler)
+        {
+            var client = new HttpClient(handler)
+            {
+                BaseAddress = new Uri("http://localhost")
+            };
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            return client;
+        }
+
+        private OwinHttpMessageHandler GetOwinHttpMessageHandler(AppBuilder appBuilder)
+        {
+            var handler = new OwinHttpMessageHandler(appBuilder.Build())
+            {
+                UseCookies = true
+            };
+            return handler;
         }
     }
 }
