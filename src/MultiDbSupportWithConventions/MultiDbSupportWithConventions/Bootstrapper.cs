@@ -26,7 +26,7 @@
                 case "system.data.sqlclient":
                     container.Register<IDbConnectionProvider, SqlServerConnectionProvider>();
                     container.Register<IRequestHandler<UserListQuery, IEnumerable<User>>, MssqlUserListQueryRequestHandler>();
-                    container.Register<IRequestHandler<UserInputModel, int>, MsSqlAddUserCommandHandler>();
+                    container.Register<IRequestHandler<UserInputModel, int>, MsSqlAddUserCommandCommandHandler>();
                     break;
                 case "npgsql":
                     container.Register<IDbConnectionProvider, PostgresConnectionProvider>();

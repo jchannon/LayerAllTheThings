@@ -21,7 +21,7 @@
             using (var dbConnection = this.dbConnectionProvider.GetConnection())
             {
                 //Here we can do postgres specific sql if needs be
-                var data = dbConnection.Query<User>("select * from users;", commandType: CommandType.StoredProcedure);
+                var data = dbConnection.Query<User>("select * from users;");
                 return data;
             }
         }

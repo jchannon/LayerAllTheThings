@@ -1,46 +1,12 @@
 ﻿namespace MultiDbSupportWithConventions.Features.Users.AddUser
 {
-    using System;
     using System.Linq;
 
     using Dapper;
 
-    using MediatR;
-
-    public abstract class AddUser : IRequestHandler<UserInputModel, int>
+    public class MsSqlAddUserCommandCommandHandler : AddUserCommand
     {
-        protected readonly IDbConnectionProvider connectionProvider;
-
-        public AddUser(IDbConnectionProvider connectionProvider)
-        {
-            this.connectionProvider = connectionProvider;
-        }
-
-        public int Handle(UserInputModel message)
-        {
-            //Contrived shared logic across shared across multi db implementations
-            var userAlreadyExist = this.UserExists(message);
-
-            if (userAlreadyExist)
-            {
-                //We could add a custom validation error to gracefully return a message
-                //We could throw an exception, I think the validation would bet better but I'm currently feeling lazy on a Tuesday morning in 2015
-                throw new Exception("User exists");
-            }
-
-            var id = this.StoreNewUser(message);
-
-            return id;
-        }
-
-        protected abstract int StoreNewUser(UserInputModel message);
-
-        protected abstract bool UserExists(UserInputModel message);
-    }
-
-    public class MsSqlAddUserCommandHandler : AddUser
-    {
-        public MsSqlAddUserCommandHandler(IDbConnectionProvider connectionProvider) : base(connectionProvider)
+        public MsSqlAddUserCommandCommandHandler(IDbConnectionProvider connectionProvider) : base(connectionProvider)
         {
         }
 
