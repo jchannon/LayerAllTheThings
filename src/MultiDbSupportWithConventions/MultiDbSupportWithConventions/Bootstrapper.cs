@@ -6,6 +6,10 @@
 
     using MediatR;
 
+    using MultiDbSupportWithConventions.Features.Users;
+    using MultiDbSupportWithConventions.Features.Users.AddUser;
+    using MultiDbSupportWithConventions.Features.Users.GetUsers;
+
     using Nancy;
     using Nancy.TinyIoc;
 
@@ -22,6 +26,7 @@
                 case "system.data.sqlclient":
                     container.Register<IDbConnectionProvider, SqlServerConnectionProvider>();
                     container.Register<IRequestHandler<UserListQuery, IEnumerable<User>>, MssqlUserListQueryRequestHandler>();
+                    container.Register<IRequestHandler<UserInputModel, int>, MsSqlAddUserCommandHandler>();
                     break;
                 case "npgsql":
                     container.Register<IDbConnectionProvider, PostgresConnectionProvider>();
@@ -31,8 +36,6 @@
                     throw new ArgumentException("Invalid ProviderName in connection string.");
             }
             container.Register<IMediator>(new Mediator(container.Resolve, container.ResolveAll));
-        
-           
         }
     }
 }

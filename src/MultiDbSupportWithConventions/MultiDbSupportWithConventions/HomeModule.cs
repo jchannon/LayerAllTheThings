@@ -2,7 +2,11 @@
 {
     using MediatR;
 
+    using MultiDbSupportWithConventions.Features.Users;
+    using MultiDbSupportWithConventions.Features.Users.GetUsers;
+
     using Nancy;
+    using Nancy.ModelBinding;
 
     public class HomeModule : NancyModule
     {
@@ -17,8 +21,17 @@
 
             Post["/"] = _ =>
             {
-                //We would do the same above using mediatr to call a command handler
-                return 201;
+                var incomingModel = this.Bind<UserInputModel>();//This could be moved to an extension or decorator to the command
+
+                // This could also be added to an extension or decorator to keep modules anaemic and have cross cutting converns like validation orthogonal
+                if (!this.ModelValidationResult.IsValid)
+                {
+                    return 422;
+                }
+
+                var id = mediator.Send(incomingModel);
+
+                return Negotiate.WithStatusCode(201).WithHeader("Location", "http://example.com/" + id);
             };
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace MultiDbSupportWithConventions
+﻿namespace MultiDbSupportWithConventions.Features.Users
 {
     public class User
     {

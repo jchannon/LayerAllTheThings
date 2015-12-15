@@ -1,4 +1,4 @@
-﻿namespace MultiDbSupportWithConventions
+﻿namespace MultiDbSupportWithConventions.Features.Users.GetUsers
 {
     using System.Collections.Generic;
     using System.Data;
@@ -7,11 +7,11 @@
 
     using MediatR;
 
-    public class MssqlUserListQueryRequestHandler : IRequestHandler<UserListQuery, IEnumerable<User>>
+    public class NpgsqlUserListQueryRequestHandler : IRequestHandler<UserListQuery, IEnumerable<User>>
     {
         private readonly IDbConnectionProvider dbConnectionProvider;
 
-        public MssqlUserListQueryRequestHandler(IDbConnectionProvider dbConnectionProvider)
+        public NpgsqlUserListQueryRequestHandler(IDbConnectionProvider dbConnectionProvider)
         {
             this.dbConnectionProvider = dbConnectionProvider;
         }
@@ -20,8 +20,8 @@
         {
             using (var dbConnection = this.dbConnectionProvider.GetConnection())
             {
-                //Here we can do MSSQL specific sql if needs be
-                var data = dbConnection.Query<User>("select * from users");
+                //Here we can do postgres specific sql if needs be
+                var data = dbConnection.Query<User>("select * from users;", commandType: CommandType.StoredProcedure);
                 return data;
             }
         }

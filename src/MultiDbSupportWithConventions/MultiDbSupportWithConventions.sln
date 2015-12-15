@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiDbSupportWithConventions", "MultiDbSupportWithConventions\MultiDbSupportWithConventions.csproj", "{645F4720-8DFE-4A4E-BCF1-A6428E6DEDD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiDbSupportWithConventions.Tests", "MultiDbSupportWithConventions.Tests\MultiDbSupportWithConventions.Tests.csproj", "{B32B3A52-85DD-49F4-8985-4121E5154A2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{645F4720-8DFE-4A4E-BCF1-A6428E6DEDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{645F4720-8DFE-4A4E-BCF1-A6428E6DEDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{645F4720-8DFE-4A4E-BCF1-A6428E6DEDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B32B3A52-85DD-49F4-8985-4121E5154A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B32B3A52-85DD-49F4-8985-4121E5154A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B32B3A52-85DD-49F4-8985-4121E5154A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B32B3A52-85DD-49F4-8985-4121E5154A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

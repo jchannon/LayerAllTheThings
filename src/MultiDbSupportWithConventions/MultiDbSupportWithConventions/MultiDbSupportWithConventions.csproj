@@ -68,22 +68,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Features\Users\AddUser\MsSqlAddUserCommandHandler.cs" />
+    <Compile Include="Features\Users\GetUsers\MsSqlUserListQueryRequestHandler.cs" />
+    <Compile Include="Features\Users\GetUsers\NpgsqlUserListQueryRequestHandler.cs" />
+    <Compile Include="Features\Users\User.cs" />
+    <Compile Include="Features\Users\GetUsers\UserListQuery.cs" />
+    <Compile Include="Features\Users\AddUser\UserInputModel.cs" />
     <Compile Include="HomeModule.cs" />
     <Compile Include="IDbConnectionProvider.cs" />
-    <Compile Include="MsSqlUserListQueryRequestHandler.cs" />
     <Compile Include="PostgresConnectionProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerConnectionProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserListQuery.cs" />
-    <Compile Include="NpgsqlUserListQueryRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
