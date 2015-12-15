@@ -3,6 +3,7 @@ namespace MultiDbSupportWithConventions.Features.Users.AddUser
     using System;
 
     using FluentValidation;
+    using FluentValidation.Results;
 
     using MediatR;
 
@@ -28,9 +29,7 @@ namespace MultiDbSupportWithConventions.Features.Users.AddUser
 
             if (userAlreadyExist)
             {
-                //We could add a custom validation error to gracefully return a message
-                //We could throw an exception, I think the validation would bet better but I'm currently feeling lazy on a Tuesday morning in 2015
-                throw new Exception("User exists");
+                throw new ValidationException(new[]{new ValidationFailure("Email","User with this email already exists") });
             }
 
             var id = this.StoreNewUser(message);

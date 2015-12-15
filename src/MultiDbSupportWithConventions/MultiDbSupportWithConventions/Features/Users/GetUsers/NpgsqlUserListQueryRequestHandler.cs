@@ -17,6 +17,7 @@
 
         public IEnumerable<User> Handle(UserListQuery message)
         {
+            //This should have an intgreation test
             using (var dbConnection = this.dbConnectionProvider.GetConnection())
             {
                 //Here we can do postgres specific sql if needs be

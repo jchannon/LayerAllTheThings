@@ -18,6 +18,7 @@
 
         public User Handle(GetUserQuery message)
         {
+            //This class will need to be tested against a live database in an integration test
             using (var conn = this.dbConnectionProvider.GetConnection())
             {
                 var user =

@@ -65,7 +65,7 @@
         }
 
         [Fact]
-        public async Task Should_return_500_if_user_exists()
+        public async Task Should_return_422_if_existing_user_exists()
         {
             var appBuilder = new AppBuilder();
             new Startup(new OurTestBStrapper(new NoDbAddUserCommandHandler(userExists: true, newUserId: 1)))
@@ -89,7 +89,7 @@
                 Email = "vincent@home.com"
             });
 
-            Assert.Equal(500, (int)response.StatusCode);
+            Assert.Equal(422, (int)response.StatusCode);
         }
     }
 }
