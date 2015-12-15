@@ -36,6 +36,10 @@
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MediatR">
       <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
     </Reference>
@@ -54,6 +58,10 @@
     <Reference Include="Nancy.Owin">
       <HintPath>..\packages\Nancy.Owin.1.3.0\lib\net40\Nancy.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Validation.FluentValidation, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Validation.FluentValidation.1.3.0\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\packages\Npgsql.3.0.4\lib\net45\Npgsql.dll</HintPath>
     </Reference>
@@ -68,14 +76,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Features\Users\AddUser\AddUserCommand.cs" />
+    <Compile Include="Features\Users\AddUser\AddUserCommandHandler.cs" />
+    <Compile Include="Features\Users\AddUser\AddUserValidator.cs" />
     <Compile Include="Features\Users\AddUser\MsSqlAddUserCommandHandler.cs" />
     <Compile Include="Features\Users\GetUsers\MsSqlUserListQueryRequestHandler.cs" />
     <Compile Include="Features\Users\GetUsers\NpgsqlUserListQueryRequestHandler.cs" />
-    <Compile Include="Features\Users\HomeModule.cs" />
+    <Compile Include="Features\Users\UserModule.cs" />
     <Compile Include="Features\Users\User.cs" />
     <Compile Include="Features\Users\GetUsers\UserListQuery.cs" />
-    <Compile Include="Features\Users\AddUser\UserInputModel.cs" />
+    <Compile Include="Features\Users\AddUser\AddUserCommand.cs" />
     <Compile Include="IDbConnectionProvider.cs" />
     <Compile Include="PostgresConnectionProvider.cs" />
     <Compile Include="Program.cs" />

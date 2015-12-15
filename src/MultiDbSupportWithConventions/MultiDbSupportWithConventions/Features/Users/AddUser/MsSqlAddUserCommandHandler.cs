@@ -4,14 +4,15 @@
 
     using Dapper;
 
-    public class MsSqlAddUserCommandCommandHandler : AddUserCommand
+    public class MsSqlAddUserCommandHandlerCommandHandlerHandler : AddUserCommandHandler
     {
-        public MsSqlAddUserCommandCommandHandler(IDbConnectionProvider connectionProvider) : base(connectionProvider)
+        public MsSqlAddUserCommandHandlerCommandHandlerHandler(IDbConnectionProvider connectionProvider) : base(connectionProvider)
         {
         }
 
-        protected override int StoreNewUser(UserInputModel message)
+        protected override int StoreNewUser(AddUserCommand message)
         {
+            //This will some integration tests against a db
             using (var conn = this.connectionProvider.GetConnection())
             {
                 return conn.Query<int>(@"
@@ -22,8 +23,9 @@
             }
         }
 
-        protected override bool UserExists(UserInputModel message)
+        protected override bool UserExists(AddUserCommand message)
         {
+            //This will some integration tests against a db
             using (var conn = this.connectionProvider.GetConnection())
             {
                 var count= conn.ExecuteScalar<int>("select count(*) from users where email = @email",new{email = message.Email });

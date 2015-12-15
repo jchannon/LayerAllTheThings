@@ -20,7 +20,7 @@
 
             this.Post["/"] = _ =>
             {
-                var incomingModel = this.Bind<UserInputModel>();//This could be moved to an extension or decorator to the command
+                var incomingModel = this.BindAndValidate<AddUserCommand>();//This could be moved to an extension or decorator to the command
 
                 // This could also be added to an extension or decorator to keep modules anaemic and have cross cutting converns like validation orthogonal
                 if (!this.ModelValidationResult.IsValid)
