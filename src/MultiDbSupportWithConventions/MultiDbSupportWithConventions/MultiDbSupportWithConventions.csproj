@@ -71,10 +71,10 @@
     <Compile Include="Features\Users\AddUser\MsSqlAddUserCommandHandler.cs" />
     <Compile Include="Features\Users\GetUsers\MsSqlUserListQueryRequestHandler.cs" />
     <Compile Include="Features\Users\GetUsers\NpgsqlUserListQueryRequestHandler.cs" />
+    <Compile Include="Features\Users\HomeModule.cs" />
     <Compile Include="Features\Users\User.cs" />
     <Compile Include="Features\Users\GetUsers\UserListQuery.cs" />
     <Compile Include="Features\Users\AddUser\UserInputModel.cs" />
-    <Compile Include="HomeModule.cs" />
     <Compile Include="IDbConnectionProvider.cs" />
     <Compile Include="PostgresConnectionProvider.cs" />
     <Compile Include="Program.cs" />

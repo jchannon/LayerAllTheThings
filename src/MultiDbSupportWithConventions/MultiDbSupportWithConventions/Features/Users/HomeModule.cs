@@ -1,25 +1,24 @@
-﻿namespace MultiDbSupportWithConventions
+﻿namespace MultiDbSupportWithConventions.Features.Users
 {
     using MediatR;
 
-    using MultiDbSupportWithConventions.Features.Users;
     using MultiDbSupportWithConventions.Features.Users.GetUsers;
 
     using Nancy;
     using Nancy.ModelBinding;
 
-    public class HomeModule : NancyModule
+    public class UserModule : NancyModule
     {
-        public HomeModule(IMediator mediator)
+        public UserModule(IMediator mediator)
         {
-            Get["/"] = _ =>
+            this.Get["/"] = _ =>
             {
                 var query = new UserListQuery(-1);
 
                 return mediator.Send(query);
             };
 
-            Post["/"] = _ =>
+            this.Post["/"] = _ =>
             {
                 var incomingModel = this.Bind<UserInputModel>();//This could be moved to an extension or decorator to the command
 
@@ -31,7 +30,7 @@
 
                 var id = mediator.Send(incomingModel);
 
-                return Negotiate.WithStatusCode(201).WithHeader("Location", "http://example.com/" + id);
+                return this.Negotiate.WithStatusCode(201).WithHeader("Location", "http://example.com/" + id);
             };
         }
     }
