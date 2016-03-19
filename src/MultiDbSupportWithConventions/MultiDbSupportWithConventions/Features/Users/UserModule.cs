@@ -1,4 +1,7 @@
-﻿namespace MultiDbSupportWithConventions.Features.Users
+﻿using MultiDbSupportWithConventions.Features.Users.UpdateUser;
+using Nancy.Routing;
+
+namespace MultiDbSupportWithConventions.Features.Users
 {
     using System;
     using System.Linq;
@@ -52,6 +55,36 @@
                     return
                         Negotiate.WithModel(ex.Errors.Select(x => new {x.PropertyName, x.ErrorMessage}))
                             .WithStatusCode(HttpStatusCode.UnprocessableEntity);
+                }
+            };
+
+            this.Put["/{id:int}"] = _ =>
+            {
+                var updateCmd = this.Bind<UpdateUserCommand>();
+                try
+                {
+                    var result = mediator.Send(updateCmd);
+
+                    return 204;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return 404;
+                }
+            };
+
+            this.Delete["/{id:int}"] = parameters =>
+            {
+                int id = parameters.id;
+                var deleteUserCommand = new DeleteUserCommand(id);
+                try
+                {
+                    var result = mediator.Send(deleteUserCommand);
+                    return 204;
+                }
+                catch (InvalidOperationException)
+                {
+                    return 404;
                 }
             };
         }

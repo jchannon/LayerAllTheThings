@@ -13,7 +13,7 @@
 
         protected override int StoreNewUser(AddUserCommand message)
         {
-            //This will some integration tests against a db
+            //This will need some integration tests against a db
             using (var conn = this.connectionProvider.GetConnection())
             {
                 return conn.Query<int>(@"
