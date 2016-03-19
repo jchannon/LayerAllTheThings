@@ -21,7 +21,7 @@ namespace MultiDbSupportWithConventions
         {
             //You wouldn't do this normally as you can just try and delete without getting the user first but 
             //just an example of using a shared query class
-            var user = this.getUserByIdQuery.GetUserById(message.Id);
+            var user = this.getUserByIdQuery.Execute(message.Id);
 
             using (var conn = this.dbConnectionProvider.GetConnection())
             {

@@ -4,6 +4,6 @@ namespace MultiDbSupportWithConventions.Features.Users.DataAccess
 {
     public interface IGetUserByIdQuery
     {
-        User GetUserById(int id);
+        User Execute(int id);
     }
 }
