@@ -14,7 +14,7 @@ namespace MultiDbSupportWithConventions.Features.Users.DataAccess
             this.dbConnectionProvider = dbConnectionProvider;
             
         }
-        public User GetUserById(int id)
+        public User Execute(int id)
         {
             using (var conn = this.dbConnectionProvider.GetConnection())
             {

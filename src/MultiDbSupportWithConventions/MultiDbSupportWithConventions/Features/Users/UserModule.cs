@@ -22,7 +22,7 @@ namespace MultiDbSupportWithConventions.Features.Users
         {
             this.Get["/"] = _ =>
             {
-                var query = new UserListQuery(-1);
+                    var query = new UserListQuery();
 
                 return mediator.Send(query);
             };
