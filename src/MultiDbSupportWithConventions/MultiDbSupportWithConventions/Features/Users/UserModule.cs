@@ -22,8 +22,14 @@ namespace MultiDbSupportWithConventions.Features.Users
         {
             this.Get["/"] = _ =>
             {
-                    var query = new UserListQuery();
+                var query = new UserListQuery();
 
+                return mediator.Send(query);
+            };
+
+            this.Get["/paging"] = _ =>
+            {
+                var query = new UserListQuery();
                 return mediator.Send(query);
             };
 

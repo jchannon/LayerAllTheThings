@@ -97,6 +97,9 @@
     <Compile Include="Features\Users\DeleteUser\DeleteUserCommandHandler.cs" />
     <Compile Include="Features\Users\DataAccess\GetUserByIdQuery.cs" />
     <Compile Include="Features\Users\DataAccess\IGetUserByIdQuery.cs" />
+    <Compile Include="Features\Users\DataAccess\AbstractNpgsqlPagingRequestHandler.cs" />
+    <Compile Include="Features\Users\GetUsersPaged\NpgsqlUserListQueryPagingHandler.cs" />
+    <Compile Include="Features\Users\GetUsersPaged\PagedUserListQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -106,6 +109,7 @@
     <Folder Include="Features\Users\" />
     <Folder Include="Features\Users\DeleteUser\" />
     <Folder Include="Features\Users\DataAccess\" />
+    <Folder Include="Features\Users\GetUsersPaged\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

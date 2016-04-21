@@ -50,6 +50,7 @@ namespace MultiDbSupportWithConventions
                     container.Register<IRequestHandler<UpdateUserCommand,int>, UpdateUserCommandHandler>();
                     container.Register<IRequestHandler<DeleteUserCommand,int>, DeleteUserCommandHandler>();
                     container.Register<IGetUserByIdQuery,GetUserByIdQuery>();
+                    container.Register<IRequestHandler<PagedUserListQuery, IEnumerable<User>>, NpgsqlUserListQueryPagingHandler>();
                     break;
                 default:
                     throw new ArgumentException("Invalid ProviderName in connection string.");
